@@ -20,10 +20,8 @@
   "name": "artoncanvas-final",
   "version": "1.0.0",
   "type": "module",
-  "main": "src/js/app.js",
+  "main": "app.js",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
