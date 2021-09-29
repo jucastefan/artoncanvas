@@ -473,8 +473,34 @@ function _interopRequireDefault(obj) {
         default: obj
     };
 }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
 // import OrderScreen from "../views/OrderScreen.js";
-const routes = {
+var routes = {
     "/": _HomeScreen.default,
     "/product/:id": _ProductScreen.default,
     // "/order/:id": OrderScreen,
@@ -487,19 +513,24 @@ const routes = {
     "/payment": _PaymentScreen.default,
     "/order": _PlaceOrderScreen.default
 };
-const router = async ()=>{
-    _utils.showLoading();
-    const request = _utils.parseRequestUrl();
-    const parseUrl = (request.resource ? `/${request.resource}` : "/") + (request.id ? "/:id" : "") + (request.verb ? `/${request.verb}` : "");
-    const screen = routes[parseUrl] ? routes[parseUrl] : _Error404Screen.default;
-    const main = document.getElementById("main-container");
-    const sign = document.getElementById("singin");
-    await _Header.default.after_render();
-    sign.innerHTML = await _Header.default.render();
-    main.innerHTML = await screen.render();
-    if (screen.after_render) await screen.after_render();
-    _utils.hideLoading();
-};
+var router = /*#__PURE__*/ function() {
+    var _ref = _asyncToGenerator(function*() {
+        _utils.showLoading();
+        var request = _utils.parseRequestUrl();
+        var parseUrl = (request.resource ? "/".concat(request.resource) : "/") + (request.id ? "/:id" : "") + (request.verb ? "/".concat(request.verb) : "");
+        var screen = routes[parseUrl] ? routes[parseUrl] : _Error404Screen.default;
+        var main = document.getElementById("main-container");
+        var sign = document.getElementById("singin");
+        yield _Header.default.after_render();
+        sign.innerHTML = yield _Header.default.render();
+        main.innerHTML = yield screen.render();
+        if (screen.after_render) yield screen.after_render();
+        _utils.hideLoading();
+    });
+    return function router1() {
+        return _ref.apply(this, arguments);
+    };
+}();
 window.addEventListener("load", router);
 window.addEventListener("haschange", router);
 
@@ -510,26 +541,60 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _utils = require("../js/utils.js");
-const HomeScreen = {
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+var HomeScreen = {
     after_render: ()=>{
-        const logo = document.querySelector(".navbar-brand");
-        const btnShop = document.querySelector(".cart");
+        var logo = document.querySelector(".navbar-brand");
+        var btnShop = document.querySelector(".cart");
         btnShop.addEventListener("click", function() {
-            if (document.location.hash = `/cart`) window.location.reload();
+            document.location.hash = "/cart";
+            window.location.reload();
         });
         logo.addEventListener("click", function() {
-            if (document.location.hash = `/`) window.location.reload();
+            document.location.hash = "/";
+            window.location.reload();
         });
     },
-    render: async ()=>{
-        _utils.showLoading();
-        const res = await fetch(" https://serene-sea-96098.herokuapp.com/api/product");
-        _utils.hideLoading();
-        if (!res || !res.ok) return `<div>Eroare</div>`;
-        const products = await res.json();
-        return `\n    <div class="row row-cols-1 row-cols-md-3 g-5 d-flex justify-content-center align-items-center">\n         ${products.map((product)=>`\n         <div class="col ">\n            <div class="card  d-flex bg-transparent justify-content-center align-items-center shadow-lg p-3 mb-4 bg-transparent bg-gradient rounded ">\n               <a id='pp' href="/#/product/${product.id}" onClick="window.close();window.open('/#/product/${product.id}')">\n                 <img src="./src/img/${product.img}.jpeg" id="prod" class="card-img-top img-thumbnail img-fluid mt-5 rounded pointer" alt="${product.tag}">\n               </a>\n               <div class="card-body">\n                   <h6 class="card-title">🏷️Preț: ${product.price}lei</h6>\n                   <a class='text-decoration-none text-dark h4'  href="/#/product/${product.id}" target="_top">\n                   <p class="card-text">${product.name}</p>\n                   </a>\n                   \n                </div>\n             </div>   \n           </div>\n          `
-        ).join("\n")}     \n       </div>\n       <div class="p-5"></div>\n    `;
-    }
+    render: function() {
+        var _render = _asyncToGenerator(function*() {
+            _utils.showLoading();
+            var res = yield fetch(" https://serene-sea-96098.herokuapp.com/api/product");
+            _utils.hideLoading();
+            if (!res || !res.ok) return "<div>Eroare</div>";
+            var products = yield res.json();
+            return "\n    <div class=\"row row-cols-1 row-cols-md-3 g-5 d-flex justify-content-center align-items-center\">\n         ".concat(products.map((product)=>"\n         <div class=\"col \">\n            <div class=\"card  d-flex bg-transparent justify-content-center align-items-center shadow-lg p-3 mb-4 bg-transparent bg-gradient rounded \">\n               <a id='pp' href=\"/#/product/".concat(product.id, "\" onClick=\"window.close();window.open('/#/product/").concat(product.id, "')\">\n                 <img src=\"./src/img/").concat(product.img, ".png\" id=\"prod\" class=\"card-img-top img-thumbnail img-fluid mt-5 rounded pointer\" alt=\"").concat(product.tag, "\">\n               </a>\n               <div class=\"card-body\">\n                   <h6 class=\"card-title\">\uD83C\uDFF7\uFE0FPre\u021B: ").concat(product.price, "lei</h6>\n                   <a class='text-decoration-none text-dark h4'  href=\"/#/product/").concat(product.id, "\" target=\"_top\">\n                   <p class=\"card-text\">").concat(product.name, "</p>\n                   </a>\n                   \n                </div>\n             </div>   \n           </div>\n          ")
+            ).join("\n"), "     \n       </div>\n       <div class=\"p-5\"></div>\n    ");
+        });
+        function render() {
+            return _render.apply(this, arguments);
+        }
+        return render;
+    }()
 };
 var _default = HomeScreen;
 exports.default = _default;
@@ -541,9 +606,35 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.redirectUser = exports.showMessage = exports.hideLoading = exports.showLoading = exports.rerender = exports.parseRequestUrl = void 0;
 var _localStorage = require("./localStorage.js");
-const parseRequestUrl = ()=>{
-    const url = document.location.hash.toLowerCase();
-    const request = url.split("/");
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+var parseRequestUrl = ()=>{
+    var url = document.location.hash.toLowerCase();
+    var request = url.split("/");
     return {
         resource: request[1],
         id: request[2],
@@ -551,21 +642,26 @@ const parseRequestUrl = ()=>{
     };
 };
 exports.parseRequestUrl = parseRequestUrl;
-const rerender = async (component)=>{
-    document.getElementById("main-container").innerHTML = await component.render();
-    await component.after_render();
-};
+var rerender = /*#__PURE__*/ function() {
+    var _ref = _asyncToGenerator(function*(component) {
+        document.getElementById("main-container").innerHTML = yield component.render();
+        yield component.after_render();
+    });
+    return function rerender1(_x) {
+        return _ref.apply(this, arguments);
+    };
+}();
 exports.rerender = rerender;
-const showLoading = ()=>{
+var showLoading = ()=>{
     document.getElementById("loading-overlay").classList.add("active");
 };
 exports.showLoading = showLoading;
-const hideLoading = ()=>{
+var hideLoading = ()=>{
     document.getElementById("loading-overlay").classList.remove("active");
 };
 exports.hideLoading = hideLoading;
-const showMessage = (message, callback)=>{
-    document.getElementById("message-overlay").innerHTML = `\n  \n  <div id='message-overlay-content'>\n     <div class="card text-center" style="width: 23rem;">\n        <div class="card-body">\n          <h5 class="card-title text-dark">${message}</h5>\n          <button class='btn btn-danger bg-gradient' id='message-overlay-close-button'>Închide</button>\n        </div>\n     </div>\n  </div>\n \n  `;
+var showMessage = (message, callback)=>{
+    document.getElementById("message-overlay").innerHTML = "\n  \n  <div id='message-overlay-content'>\n     <div class=\"card text-center\" style=\"width: 23rem;\">\n        <div class=\"card-body\">\n          <h5 class=\"card-title text-dark\">".concat(message, "</h5>\n          <button class='btn btn-danger bg-gradient' id='message-overlay-close-button'>\xCEnchide</button>\n        </div>\n     </div>\n  </div>\n \n  ");
     document.getElementById("message-overlay").classList.add("active");
     document.getElementById("message-overlay-close-button").addEventListener("click", ()=>{
         document.getElementById("message-overlay").classList.remove("active");
@@ -573,7 +669,7 @@ const showMessage = (message, callback)=>{
     });
 };
 exports.showMessage = showMessage;
-const redirectUser = ()=>{
+var redirectUser = ()=>{
     if (_localStorage.getCartItems().length !== 0) document.location.hash = "/shipping";
     else document.location = "/";
 };
@@ -585,16 +681,17 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.cleanCart = exports.setPayment = exports.getPayment = exports.setShipping = exports.getShipping = exports.getUserInfo = exports.clearUser = exports.setuserInfo = exports.setCartItems = exports.getCartItems = void 0;
-const getCartItems = ()=>{
-    const cartItems = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [];
+var getCartItems = ()=>{
+    var cartItems = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [];
     return cartItems;
 };
 exports.getCartItems = getCartItems;
-const setCartItems = (cartItems)=>{
+var setCartItems = (cartItems)=>{
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
 };
 exports.setCartItems = setCartItems;
-const setuserInfo = ({ id ="" , name ="" , email ="" , password ="" , isAdmin =false  })=>{
+var setuserInfo = (_ref)=>{
+    var { id ="" , name ="" , email ="" , password ="" , isAdmin =false  } = _ref;
     localStorage.setItem("userInfo", JSON.stringify({
         id,
         name,
@@ -604,11 +701,11 @@ const setuserInfo = ({ id ="" , name ="" , email ="" , password ="" , isAdmin =f
     }));
 };
 exports.setuserInfo = setuserInfo;
-const clearUser = ()=>{
+var clearUser = ()=>{
     localStorage.removeItem("userInfo");
 };
 exports.clearUser = clearUser;
-const getUserInfo = ()=>{
+var getUserInfo = ()=>{
     return localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : {
         name: "",
         email: "",
@@ -616,8 +713,8 @@ const getUserInfo = ()=>{
     };
 };
 exports.getUserInfo = getUserInfo;
-const getShipping = ()=>{
-    const shipping = localStorage.getItem("shipping") ? JSON.parse(localStorage.getItem("shipping")) : {
+var getShipping = ()=>{
+    var shipping = localStorage.getItem("shipping") ? JSON.parse(localStorage.getItem("shipping")) : {
         adress: "",
         city: "",
         postalCode: "",
@@ -626,7 +723,8 @@ const getShipping = ()=>{
     return shipping;
 };
 exports.getShipping = getShipping;
-const setShipping = ({ adress ="" , city ="" , postalCode ="" , country =""  })=>{
+var setShipping = (_ref2)=>{
+    var { adress ="" , city ="" , postalCode ="" , country =""  } = _ref2;
     localStorage.setItem("shipping", JSON.stringify({
         adress,
         city,
@@ -635,20 +733,21 @@ const setShipping = ({ adress ="" , city ="" , postalCode ="" , country =""  })=
     }));
 };
 exports.setShipping = setShipping;
-const getPayment = ()=>{
-    const payment = localStorage.getItem("payment") ? JSON.parse(localStorage.getItem("payment")) : {
+var getPayment = ()=>{
+    var payment = localStorage.getItem("payment") ? JSON.parse(localStorage.getItem("payment")) : {
         paymentMethod: "Plata la ramburs"
     };
     return payment;
 };
 exports.getPayment = getPayment;
-const setPayment = ({ paymentMethod ="card"  })=>{
+var setPayment = (_ref3)=>{
+    var { paymentMethod ="card"  } = _ref3;
     localStorage.setItem("payment", JSON.stringify({
         paymentMethod
     }));
 };
 exports.setPayment = setPayment;
-const cleanCart = ()=>{
+var cleanCart = ()=>{
     localStorage.removeItem("cartItems");
 };
 exports.cleanCart = cleanCart;
@@ -661,31 +760,65 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _api = require("../js/api.js");
 var _utils = require("../js/utils.js");
-const ProductScreen = {
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+var ProductScreen = {
     after_render: ()=>{
-        const request = _utils.parseRequestUrl();
-        const btnCart = document.getElementById("btn1");
-        const btnShop = document.querySelector(".cart");
-        const btnSignin = document.querySelector("#singin");
+        var request = _utils.parseRequestUrl();
+        var btnCart = document.getElementById("btn1");
+        var btnShop = document.querySelector(".cart");
+        var btnSignin = document.querySelector("#singin");
         btnSignin.addEventListener("click", function() {
-            if (document.location.hash = `/signin`) window.location.reload();
+            document.location.hash = "/signin";
+            window.location.reload();
         });
         btnCart.addEventListener("click", function() {
-            if (document.location.hash = `/cart/${request.id}`) window.location.reload();
+            if (document.location.hash = "/cart/".concat(request.id)) window.location.reload();
         });
         btnShop.addEventListener("click", function() {
-            if (document.location.hash = `/cart`) window.location.reload();
+            document.location.hash = "/cart";
+            window.location.reload();
         });
     },
-    render: async ()=>{
-        const request = _utils.parseRequestUrl();
-        _utils.showLoading();
-        const product = await _api.getProduct(request.id);
-        const pagination = document.querySelector(".pages-container");
-        if (pagination) pagination.classList.remove("hidden-pages");
-        _utils.hideLoading();
-        return `\n    <a type="button" href='/' onClick="window.close();window.open('/')" id='backtoshop' class="btn bg-gradient btn-danger  mb-2 text-white position-absolute top-0 start-50 translate-middle-x"><i class="fas fa-arrow-circle-left p-1"></i>Inapoi<i class="fas fa-store p-1"></i></a>\n    <div class="row row-cols-1 row-cols-md-3 g-5 d-flex justify-content-center align-items-center mt-4 ">\n         <div class="col pb-md-5  ">\n            <div class="card  d-flex bg-transparent w-60 justify-content-center align-items-center shadow-lg p-3 mb-4 bg-transparent bg-gradient rounded">\n              \n                 <img src="./src/img/${product.img}.jpeg" class="card-img-top img-thumbnail  img-fluid mt-4 pointer" alt="${product.tag}">\n               \n               <div class="card-body">\n                   \n                </div>\n             </div>   \n           </div>\n           <div class="col mb-5">\n            <div class="card  d-flex  justify-content-center align-items-center shadow-lg p-3 mb-4 bg-transparent bg-gradient rounded">\n               <div class="card-body ">\n                   <h1 class="card-text">${product.name}</h1>\n                   <p class="card-text">The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words.</p>\n                   <h3 class="card-title">Preț: ${product.price}lei</h3>\n                   <h6 class="card-title succes text-muted">🟢În stoc</h6>\n                \n                   <a type="button" id="btn1" class="btn btn-danger bg-gradient add-cart pointer">Adaugă în coș<i class="fas fa-plus p-1"></i></a>\n                </div>\n             </div>   \n           </div>      \n       </div>\n       <div class="p-3"></div>            \n    `;
-    }
+    render: function() {
+        var _render = _asyncToGenerator(function*() {
+            var request = _utils.parseRequestUrl();
+            _utils.showLoading();
+            var product = yield _api.getProduct(request.id);
+            var pagination = document.querySelector(".pages-container");
+            if (pagination) pagination.classList.remove("hidden-pages");
+            _utils.hideLoading();
+            return "\n    <a type=\"button\" href='/' onClick=\"window.close();window.open('/')\" id='backtoshop' class=\"btn bg-gradient btn-danger  mb-2 text-white position-absolute top-0 start-50 translate-middle-x\"><i class=\"fas fa-arrow-circle-left p-1\"></i>Inapoi<i class=\"fas fa-store p-1\"></i></a>\n    <div class=\"row row-cols-1 row-cols-md-3 g-5 d-flex justify-content-center align-items-center mt-4 \">\n         <div class=\"col pb-md-5  \">\n            <div class=\"card  d-flex bg-transparent w-60 justify-content-center align-items-center shadow-lg p-3 mb-4 bg-transparent bg-gradient rounded\">\n              \n                 <img src=\"./src/img/".concat(product.img, ".jpeg\" class=\"card-img-top img-thumbnail  img-fluid mt-4 pointer\" alt=\"").concat(product.tag, "\">\n               \n               <div class=\"card-body\">\n                   \n                </div>\n             </div>   \n           </div>\n           <div class=\"col mb-5\">\n            <div class=\"card  d-flex  justify-content-center align-items-center shadow-lg p-3 mb-4 bg-transparent bg-gradient rounded\">\n               <div class=\"card-body \">\n                   <h1 class=\"card-text\">").concat(product.name, "</h1>\n                   <p class=\"card-text\">The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words.</p>\n                   <h3 class=\"card-title\">Pre\u021B: ").concat(product.price, "lei</h3>\n                   <h6 class=\"card-title succes text-muted\">\uD83D\uDFE2\xCEn stoc</h6>\n                \n                   <a type=\"button\" id=\"btn1\" class=\"btn btn-danger bg-gradient add-cart pointer\">Adaug\u0103 \xEEn co\u0219<i class=\"fas fa-plus p-1\"></i></a>\n                </div>\n             </div>   \n           </div>      \n       </div>\n       <div class=\"p-3\"></div>            \n    ");
+        });
+        function render() {
+            return _render.apply(this, arguments);
+        }
+        return render;
+    }()
 };
 var _default = ProductScreen;
 exports.default = _default;
@@ -699,105 +832,159 @@ exports.createOrder = exports.update = exports.register = exports.signin = expor
 var _config = require("./config.js");
 var _localStorage = require("./localStorage.js");
 var _utils = require("./utils.js");
-const getProduct = async (id)=>{
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
     try {
-        const res = await fetch(`${_config.apiUrl}/api/product/${id}`);
-        const data = await res.json();
-        if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-        return data;
-    } catch (err) {
-        console.log(err);
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
     }
-};
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+var getProduct = /*#__PURE__*/ function() {
+    var _ref = _asyncToGenerator(function*(id) {
+        try {
+            var res = yield fetch("".concat(_config.apiUrl, "/api/product/").concat(id));
+            var data = yield res.json();
+            if (!res.ok) throw new Error("".concat(data.message, " (").concat(res.status, ")"));
+            return data;
+        } catch (err) {
+            console.log(err);
+        }
+    });
+    return function getProduct1(_x) {
+        return _ref.apply(this, arguments);
+    };
+}();
 exports.getProduct = getProduct;
-const signin = async ({ email , password  })=>{
-    try {
-        const res = await fetch(`${_config.apiUrl}/signin`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        });
-        const data = await res.json();
-        if (password === "") _utils.showMessage("⚠️Introduceți o parolă!");
-        else if (email === "") _utils.showMessage("⚠️Introduceți un e-mail!");
-        if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-        return data;
-    } catch (err) {
-        _utils.showMessage("⚠️Conectarea nu a reușit");
-    }
-};
+var signin = /*#__PURE__*/ function() {
+    var _ref3 = _asyncToGenerator(function*(_ref2) {
+        var { email , password  } = _ref2;
+        try {
+            var res = yield fetch("".concat(_config.apiUrl, "/signin"), {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+            var data = yield res.json();
+            if (password === "") _utils.showMessage("⚠️Introduceți o parolă!");
+            else if (email === "") _utils.showMessage("⚠️Introduceți un e-mail!");
+            if (!res.ok) throw new Error("".concat(data.message, " (").concat(res.status, ")"));
+            return data;
+        } catch (err) {
+            _utils.showMessage("⚠️Conectarea nu a reușit");
+        }
+    });
+    return function signin1(_x2) {
+        return _ref3.apply(this, arguments);
+    };
+}();
 exports.signin = signin;
-const register = async ({ name , email , password  })=>{
-    try {
-        const res = await fetch(`${_config.apiUrl}/register`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                password: password
-            })
-        });
-        const data = await res.json();
-        if (password === "") _utils.showMessage("⚠️Introduceți o parolă!");
-        else if (email === "") _utils.showMessage("⚠️Introduceți un e-mail!");
-        else if (name === "") _utils.showMessage("⚠️Introduceți un nume!");
-        return data;
-    } catch (err) {
-        _utils.showMessage("⚠️Inregistrarea nu a reușit");
-    }
-};
+var register = /*#__PURE__*/ function() {
+    var _ref5 = _asyncToGenerator(function*(_ref4) {
+        var { name , email , password  } = _ref4;
+        try {
+            var res = yield fetch("".concat(_config.apiUrl, "/register"), {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password
+                })
+            });
+            var data = yield res.json();
+            if (password === "") _utils.showMessage("⚠️Introduceți o parolă!");
+            else if (email === "") _utils.showMessage("⚠️Introduceți un e-mail!");
+            else if (name === "") _utils.showMessage("⚠️Introduceți un nume!");
+            return data;
+        } catch (err) {
+            _utils.showMessage("⚠️Inregistrarea nu a reușit");
+        }
+    });
+    return function register1(_x3) {
+        return _ref5.apply(this, arguments);
+    };
+}();
 exports.register = register;
-const update = async ({ name , email , password  })=>{
-    try {
-        const { id  } = _localStorage.getUserInfo();
-        const res = await fetch(`${_config.apiUrl}/profile/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                password: password
-            })
-        });
-        const data = await res.json();
-        return data;
-    } catch (err) {
-        console.log(err);
-    }
-};
+var update = /*#__PURE__*/ function() {
+    var _ref7 = _asyncToGenerator(function*(_ref6) {
+        var { name , email , password  } = _ref6;
+        try {
+            var { id  } = _localStorage.getUserInfo();
+            var res = yield fetch("".concat(_config.apiUrl, "/profile/").concat(id), {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password
+                })
+            });
+            var data = yield res.json();
+            return data;
+        } catch (err) {
+            console.log(err);
+        }
+    });
+    return function update1(_x4) {
+        return _ref7.apply(this, arguments);
+    };
+}();
 exports.update = update;
-const createOrder = async (order)=>{
-    try {
-        const res = await fetch(`${_config.apiUrl}/api/order`, {
-            method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(order)
-        });
-        const data = await res.json();
-        console.log(data);
-        if (res.ok) _utils.showMessage("✌️Comanda a fost plasată!");
-        return data;
-    } catch (err) {
-        return {
-            error: err.res ? err.res.data.message : err.message
-        };
-    }
-};
+var createOrder = /*#__PURE__*/ function() {
+    var _ref8 = _asyncToGenerator(function*(order) {
+        try {
+            var res = yield fetch("".concat(_config.apiUrl, "/api/order"), {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(order)
+            });
+            var data = yield res.json();
+            console.log(data);
+            if (res.ok) _utils.showMessage("✌️Comanda a fost plasată!");
+            return data;
+        } catch (err) {
+            return {
+                error: err.res ? err.res.data.message : err.message
+            };
+        }
+    });
+    return function createOrder1(_x5) {
+        return _ref8.apply(this, arguments);
+    };
+}();
 exports.createOrder = createOrder;
 
 },{"./config.js":"beA2m","./localStorage.js":"1qCbc","./utils.js":"i5Umw"}],"beA2m":[function(require,module,exports) {
@@ -806,7 +993,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.apiUrl = void 0;
-const apiUrl = " https://serene-sea-96098.herokuapp.com";
+var apiUrl = " https://serene-sea-96098.herokuapp.com";
 exports.apiUrl = apiUrl;
 
 },{}],"5t2yc":[function(require,module,exports) {
@@ -815,9 +1002,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = void 0;
-const Error404Screen = {
+var Error404Screen = {
     render: ()=>{
-        return `<div>Eroare</div>`;
+        return "<div>Eroare</div>";
     }
 };
 var _default = Error404Screen;
@@ -832,9 +1019,71 @@ exports.default = void 0;
 var _api = require("../js/api.js");
 var _localStorage = require("../js/localStorage.js");
 var _utils = require("../js/utils.js");
-const addToCart = (item, forceUpdate = false)=>{
-    let cartItems = _localStorage.getCartItems();
-    const existItem = cartItems.find((x)=>x.product === item.product
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        if (enumerableOnly) symbols = symbols.filter(function(sym) {
+            return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+        keys.push.apply(keys, symbols);
+    }
+    return keys;
+}
+function _objectSpread(target) {
+    for(var i = 1; i < arguments.length; i++){
+        var source = arguments[i] != null ? arguments[i] : {
+        };
+        if (i % 2) ownKeys(Object(source), true).forEach(function(key) {
+            _defineProperty(target, key, source[key]);
+        });
+        else if (Object.getOwnPropertyDescriptors) Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+        else ownKeys(Object(source)).forEach(function(key) {
+            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+    }
+    return target;
+}
+function _defineProperty(obj, key, value) {
+    if (key in obj) Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+    });
+    else obj[key] = value;
+    return obj;
+}
+var addToCart = function addToCart1(item) {
+    var forceUpdate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var cartItems = _localStorage.getCartItems();
+    var existItem = cartItems.find((x)=>x.product === item.product
     );
     if (existItem) {
         if (forceUpdate) cartItems = cartItems.map((x)=>x.product === existItem.product ? item : x
@@ -846,61 +1095,70 @@ const addToCart = (item, forceUpdate = false)=>{
     _localStorage.setCartItems(cartItems);
     if (forceUpdate) _utils.rerender(CartScreen);
 };
-const removeFromCart = (id)=>{
-    const items = JSON.parse(localStorage.getItem("cartItems"));
+var removeFromCart = (id)=>{
+    var items = JSON.parse(localStorage.getItem("cartItems"));
     _localStorage.setCartItems(items.filter((x)=>x.product === Number(id)
     ));
     if (id === _utils.parseRequestUrl().id) {
-        if (document.location.hash = `/cart`) window.location.reload();
+        document.location.hash = "/cart";
+        window.location.reload();
     } else _utils.rerender(CartScreen);
 };
-const CartScreen = {
+var CartScreen = {
     after_render: ()=>{
-        const btnSignin = document.querySelector("#singin");
+        var btnSignin = document.querySelector("#singin");
         btnSignin.addEventListener("click", function() {
-            if (document.location.hash = `/signin`) window.location.reload();
+            document.location.hash = "/signin";
+            window.location.reload();
         });
-        const qtySelects = document.getElementsByClassName("qty-select");
+        var qtySelects = document.getElementsByClassName("qty-select");
         Array.from(qtySelects).forEach((qtySelect)=>{
-            const items = JSON.parse(localStorage.getItem("cartItems"));
-            const item = items.find((x)=>x.product === qtySelect.id
+            var items = JSON.parse(localStorage.getItem("cartItems"));
+            var item = items.find((x)=>x.product === qtySelect.id
             );
             qtySelect.addEventListener("change", (e)=>{
-                addToCart({
-                    ...item,
+                addToCart(_objectSpread(_objectSpread({
+                }, item), {
+                }, {
                     qty: Number(e.target.value)
-                }, true);
+                }), true);
             });
         });
-        const deleteButtons = document.getElementsByClassName("delete-button");
+        var deleteButtons = document.getElementsByClassName("delete-button");
         Array.from(deleteButtons).forEach((deleteButton)=>{
             deleteButton.addEventListener("click", ()=>{
                 removeFromCart(deleteButton.id);
             });
         });
     },
-    render: async ()=>{
-        const request = _utils.parseRequestUrl();
-        if (request.id) {
-            const product = await _api.getProduct(request.id);
-            addToCart({
-                product: product.id,
-                name: product.name,
-                image: product.img,
-                price: product.price,
-                countInStock: product.countInStock,
-                qty: 1
-            });
+    render: function() {
+        var _render = _asyncToGenerator(function*() {
+            var request = _utils.parseRequestUrl();
+            if (request.id) {
+                var product = yield _api.getProduct(request.id);
+                addToCart({
+                    product: product.id,
+                    name: product.name,
+                    image: product.img,
+                    price: product.price,
+                    countInStock: product.countInStock,
+                    qty: 1
+                });
+            }
+            var cartItems = _localStorage.getCartItems();
+            return "\n    <div class=\"content cart position-relative\">\n      <div class=\"cart-list mt-5\">\n        <ul class=\"cart-list-container\">\n          <li>\n            <h3>Co\u0219ul meu</h3>\n            <div id=\"prt\">\uD83C\uDFF7\uFE0FPre\u021B</div>\n          </li>\n          ".concat(cartItems.length === 0 ? "<div class=\"h2\">Co\u0219ul este gol\uD83D\uDE14</div>" : cartItems.map((item)=>"\n            <li>\n              <div class=\"cart-image\">\n                <img src=\"/src/img/".concat(item.image, ".jpeg\" alt=\"").concat(item.name, "\" />\n              </div>\n              <div class=\"cart-name\">\n                <div>\n                  <a class=\"text-decoration-none text-dark\" href=\"/#/product/").concat(item.product, "\">\n                    ").concat(item.name, "\n                  </a>\n                </div>\n                <div>\n                \uD83D\uDCE6Cantitate: \n                  <select class=\"qty-select\" id=\"").concat(item.product, "\">\n                  ").concat([
+                    ...Array(item.countInStock).keys()
+                ].map((x)=>item.qty === x + 1 ? "<option selected value=\"".concat(x + 1, "\">").concat(x + 1, "</option>") : "<option value=\"".concat(x + 1, "\">").concat(x + 1, "</option>")
+                ), "</select>\n                  <button type=\"button\" class=\"delete-button btn bg-gradient btn-danger text-white\" id=\"").concat(item.product, "\">\n                  \uD83D\uDDD1\uFE0F\u0218terge\n                  </button>\n                </div>\n              </div>\n              <div class=\"cart-price\">\n                ").concat(item.price, "lei\n              </div>\n            </li>\n            ")
+            ).join("\n"), " \n        </ul>\n      </div>\n      <a type=\"button\" id='backtoshop' href=\"/\" class=\"btn bg-gradient btn-danger mb-5 text-white position-absolute top-0 start-50 translate-middle-x\"><i class=\"fas fa-arrow-circle-left p-1\"></i>Inapoi<i class=\"fas fa-store p-1\"></i></a>\n      <div class=\"cart-action mt-5 shadow-lg p-4 mb-5 bg-transparent bg-gradient rounded\">\n          <h3>\n          \uD83D\uDCCBTotal (").concat(cartItems.reduce((a, c)=>a + c.qty
+            , 0), " produse)\n             :\n             ").concat(cartItems.reduce((a, c)=>a + c.price * c.qty
+            , 0), "lei\n          </h3>\n          ").concat(localStorage.getItem("userInfo") ? "<button\n                type=\"button\"\n                id=\"checkout-button\"\n                onClick=\"window.close();window.open('/#/shipping')\"\n                class=\"primary fw btn bg-gradient btn-danger text-white\"\n              >\n                Comand\u0103\n              </button>" : "<button\n                type=\"button\"\n                id=\"checkout-button\"\n                onClick=\"window.close();window.open('/#/signin')\"\n                class=\"primary fw btn bg-gradient  btn-danger text-white\"\n              >\n                Comand\u0103\n              </button>", "\n      </div>\n  \n</div>\n<div class=\"p-3\"></div>\n\n    ");
+        });
+        function render() {
+            return _render.apply(this, arguments);
         }
-        const cartItems = _localStorage.getCartItems();
-        return `\n    <div class="content cart position-relative">\n      <div class="cart-list mt-5">\n        <ul class="cart-list-container">\n          <li>\n            <h3>Coșul meu</h3>\n            <div id="prt">🏷️Preț</div>\n          </li>\n          ${cartItems.length === 0 ? `<div class="h2">Coșul este gol😔</div>` : cartItems.map((item)=>`\n            <li>\n              <div class="cart-image">\n                <img src="/src/img/${item.image}.jpeg" alt="${item.name}" />\n              </div>\n              <div class="cart-name">\n                <div>\n                  <a class="text-decoration-none text-dark" href="/#/product/${item.product}">\n                    ${item.name}\n                  </a>\n                </div>\n                <div>\n                📦Cantitate: \n                  <select class="qty-select" id="${item.product}">\n                  ${[
-                ...Array(item.countInStock).keys()
-            ].map((x)=>item.qty === x + 1 ? `<option selected value="${x + 1}">${x + 1}</option>` : `<option value="${x + 1}">${x + 1}</option>`
-            )}</select>\n                  <button type="button" class="delete-button btn bg-gradient btn-danger text-white" id="${item.product}">\n                  🗑️Șterge\n                  </button>\n                </div>\n              </div>\n              <div class="cart-price">\n                ${item.price}lei\n              </div>\n            </li>\n            `
-        ).join("\n")} \n        </ul>\n      </div>\n      <a type="button" id='backtoshop' href="/" class="btn bg-gradient btn-danger mb-5 text-white position-absolute top-0 start-50 translate-middle-x"><i class="fas fa-arrow-circle-left p-1"></i>Inapoi<i class="fas fa-store p-1"></i></a>\n      <div class="cart-action mt-5 shadow-lg p-4 mb-5 bg-transparent bg-gradient rounded">\n          <h3>\n          📋Total (${cartItems.reduce((a, c)=>a + c.qty
-        , 0)} produse)\n             :\n             ${cartItems.reduce((a, c)=>a + c.price * c.qty
-        , 0)}lei\n          </h3>\n          ${localStorage.getItem("userInfo") ? `<button\n                type="button"\n                id="checkout-button"\n                onClick="window.close();window.open('/#/shipping')"\n                class="primary fw btn bg-gradient btn-danger text-white"\n              >\n                Comandă\n              </button>` : `<button\n                type="button"\n                id="checkout-button"\n                onClick="window.close();window.open('/#/signin')"\n                class="primary fw btn bg-gradient  btn-danger text-white"\n              >\n                Comandă\n              </button>`}\n      </div>\n  \n</div>\n<div class="p-3"></div>\n\n    `;
-    }
+        return render;
+    }()
 };
 var _default = CartScreen;
 exports.default = _default;
@@ -914,40 +1172,73 @@ exports.default = void 0;
 var _api = require("../js/api.js");
 var _localStorage = require("../js/localStorage.js");
 var _utils = require("../js/utils.js");
-const SignInScreen = {
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+var SignInScreen = {
     after_render: ()=>{
-        const btnShop = document.querySelector(".cart");
-        const signInForm = document.getElementById("signin-form");
-        const reg = document.getElementById("reg");
+        var btnShop = document.querySelector(".cart");
+        var signInForm = document.getElementById("signin-form");
+        var reg = document.getElementById("reg");
         reg.addEventListener("click", function() {
-            if (document.location.hash = `/register`) window.location.reload();
+            document.location.hash = "/register";
+            window.location.reload();
         });
         btnShop.addEventListener("click", function() {
-            if (document.location.hash = `/cart`) window.location.reload();
+            document.location.hash = "/cart";
+            window.location.reload();
         });
-        signInForm.addEventListener("submit", async (e)=>{
-            e.preventDefault();
-            _utils.showLoading();
-            const data = await _api.signin({
-                email: document.getElementById("InputEmail").value,
-                password: document.getElementById("InputPassword").value
+        signInForm.addEventListener("submit", /*#__PURE__*/ function() {
+            var _ref = _asyncToGenerator(function*(e) {
+                e.preventDefault();
+                _utils.showLoading();
+                var data = yield _api.signin({
+                    email: document.getElementById("InputEmail").value,
+                    password: document.getElementById("InputPassword").value
+                });
+                _utils.hideLoading();
+                var email = document.getElementById("InputEmail").value;
+                var password = document.getElementById("InputPassword").value;
+                if (password === "") _utils.showMessage("⚠️Introduceți o parolă!");
+                else if (email === "") _utils.showMessage("⚠️Introduceți un e-mail!");
+                if (data.error) alert("Invalid");
+                else {
+                    _localStorage.setuserInfo(data);
+                    _utils.redirectUser();
+                    _utils.showMessage("✔️Autentificarea a reușit!");
+                }
             });
-            _utils.hideLoading();
-            const email = document.getElementById("InputEmail").value;
-            const password = document.getElementById("InputPassword").value;
-            if (password === "") _utils.showMessage("⚠️Introduceți o parolă!");
-            else if (email === "") _utils.showMessage("⚠️Introduceți un e-mail!");
-            if (data.error) alert("Invalid");
-            else {
-                _localStorage.setuserInfo(data);
-                _utils.redirectUser();
-                _utils.showMessage("✔️Autentificarea a reușit!");
-            }
-        });
+            return function(_x) {
+                return _ref.apply(this, arguments);
+            };
+        }());
     },
     render: ()=>{
         if (_localStorage.getUserInfo().name) _utils.redirectUser();
-        return `\n   <div class='container container-signin shadow-lg p-5 mb-5 bg-transparent bg-gradient rounded position-relative '>\n   <h6 class='text-muted'>👋🏻Pentru a putea achziționa un produs este necesară autentificarea</h6>\n    <form id='signin-form'>\n      <div class="mb-3">\n        <label for="InputEmail" class="form-label">E-mail:</label>\n        <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">\n      </div>\n      <div class="mb-3">\n          <label for="InputPassword" class="form-label">Parolă:</label>\n          <input type="password" class="form-control" id="InputPassword">\n      </div>\n      \n      <button type="submit" class="btn btn-danger  bg-gradient mb-3">Conectează-te</button>\n      \n    </form>\n    <a href="/#/signin" id='reg' class="link-danger">😜Nu ai cont? Înregistrează-te aici!</a>\n   </div> \n   <div class="p-3"></div>\n    `;
+        return "\n   <div class='container container-signin shadow-lg p-5 mb-5 bg-transparent bg-gradient rounded position-relative '>\n   <h6 class='text-muted'>\uD83D\uDC4B\uD83C\uDFFBPentru a putea achzi\u021Biona un produs este necesar\u0103 autentificarea</h6>\n    <form id='signin-form'>\n      <div class=\"mb-3\">\n        <label for=\"InputEmail\" class=\"form-label\">E-mail:</label>\n        <input type=\"email\" class=\"form-control\" id=\"InputEmail\" aria-describedby=\"emailHelp\">\n      </div>\n      <div class=\"mb-3\">\n          <label for=\"InputPassword\" class=\"form-label\">Parol\u0103:</label>\n          <input type=\"password\" class=\"form-control\" id=\"InputPassword\">\n      </div>\n      \n      <button type=\"submit\" class=\"btn btn-danger  bg-gradient mb-3\">Conecteaz\u0103-te</button>\n      \n    </form>\n    <a href=\"/#/signin\" id='reg' class=\"link-danger\">\uD83D\uDE1CNu ai cont? \xCEnregistreaz\u0103-te aici!</a>\n   </div> \n   <div class=\"p-3\"></div>\n    ";
     }
 };
 var _default = SignInScreen;
@@ -960,10 +1251,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _localStorage = require("../js/localStorage.js");
-const Header = {
+var Header = {
     render: ()=>{
-        const { id , name  } = _localStorage.getUserInfo();
-        return `\n    ${name ? `<a href="/#/profile/${id}" onClick="window.close();window.open('/#/profile/${id}')" id='singin'>\n    <button\n     type="button"\n     class="btn btn-transparent pe-4"\n     data-bs-toggle="modal"\n     data-bs-target="#login"\n     >\n         <span id="cont">${name}</span><i class="fas fa-user ps-1 me-auto"></i>\n     </button>  \n </a>` : `<a href="/#/signin" onClick="window.close();window.open('/#/signin')" id='singin'>\n <button\n  type="button"\n  class="btn btn-transparent pe-4"\n  data-bs-toggle="modal"\n  data-bs-target="#login"\n  >\n      <span id="cont">Contul tău</span><i class="fas fa-sign-in-alt ps-1 me-auto"></i>\n  </button>  \n</a>`}           \n    `;
+        var { id , name  } = _localStorage.getUserInfo();
+        return "\n    ".concat(name ? "<a href=\"/#/profile/".concat(id, "\" onClick=\"window.close();window.open('/#/profile/").concat(id, "')\" id='singin'>\n    <button\n     type=\"button\"\n     class=\"btn btn-transparent pe-4\"\n     data-bs-toggle=\"modal\"\n     data-bs-target=\"#login\"\n     >\n         <span id=\"cont\">").concat(name, "</span><i class=\"fas fa-user ps-1 me-auto\"></i>\n     </button>  \n </a>") : "<a href=\"/#/signin\" onClick=\"window.close();window.open('/#/signin')\" id='singin'>\n <button\n  type=\"button\"\n  class=\"btn btn-transparent pe-4\"\n  data-bs-toggle=\"modal\"\n  data-bs-target=\"#login\"\n  >\n      <span id=\"cont\">Contul t\u0103u</span><i class=\"fas fa-sign-in-alt ps-1 me-auto\"></i>\n  </button>  \n</a>", "           \n    ");
     },
     after_render: ()=>{
     }
@@ -980,39 +1271,71 @@ exports.default = void 0;
 var _api = require("../js/api.js");
 var _localStorage = require("../js/localStorage.js");
 var _utils = require("../js/utils.js");
-const RegisterScreen = {
-    after_render: ()=>{
-        const btnShop = document.querySelector(".cart");
-        const registerForm = document.getElementById("register-form");
-        btnShop.addEventListener("click", function() {
-            if (document.location.hash = `/cart`) window.location.reload();
-        });
-        registerForm.addEventListener("submit", async (e)=>{
-            e.preventDefault();
-            _utils.showLoading();
-            const data = await _api.register({
-                name: document.getElementById("InputName").value,
-                email: document.getElementById("InputEmail").value,
-                password: document.getElementById("InputPassword").value
-            });
-            _utils.hideLoading();
-            const email = document.getElementById("InputEmail").value;
-            const password = document.getElementById("InputPassword").value;
-            const name = document.getElementById("InputName").value;
-            if (data.error) alert("Invalid");
-            else {
-                _utils.showMessage("✔️Inregistrarea a reușit!");
-                _localStorage.setuserInfo(data);
-                if (password === "") _utils.showMessage("⚠️Introduceți o parolă!");
-                else if (email === "") _utils.showMessage("⚠️Introduceți un e-mail!");
-                else if (name === "") _utils.showMessage("⚠️Introduceți un nume!");
-                _utils.redirectUser();
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
             }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
         });
+    };
+}
+var RegisterScreen = {
+    after_render: ()=>{
+        var btnShop = document.querySelector(".cart");
+        var registerForm = document.getElementById("register-form");
+        btnShop.addEventListener("click", function() {
+            document.location.hash = "/cart";
+            window.location.reload();
+        });
+        registerForm.addEventListener("submit", /*#__PURE__*/ function() {
+            var _ref = _asyncToGenerator(function*(e) {
+                e.preventDefault();
+                _utils.showLoading();
+                var data = yield _api.register({
+                    name: document.getElementById("InputName").value,
+                    email: document.getElementById("InputEmail").value,
+                    password: document.getElementById("InputPassword").value
+                });
+                _utils.hideLoading();
+                var email = document.getElementById("InputEmail").value;
+                var password = document.getElementById("InputPassword").value;
+                var name = document.getElementById("InputName").value;
+                if (data.error) alert("Invalid");
+                else {
+                    _utils.showMessage("✔️Inregistrarea a reușit!");
+                    _localStorage.setuserInfo(data);
+                    if (password === "") _utils.showMessage("⚠️Introduceți o parolă!");
+                    else if (email === "") _utils.showMessage("⚠️Introduceți un e-mail!");
+                    else if (name === "") _utils.showMessage("⚠️Introduceți un nume!");
+                    _utils.redirectUser();
+                }
+            });
+            return function(_x) {
+                return _ref.apply(this, arguments);
+            };
+        }());
     },
     render: ()=>{
         if (_localStorage.getUserInfo().name) _utils.redirectUser();
-        return `\n   <div class='container container-register shadow-lg p-5 mb-5 bg-transparent bg-gradient rounded position-relative '> \n    <form id='register-form'>\n    <div class="mb-3">\n        <label for="InputName" class="form-label">Nume:</label>\n        <input type="name" class="form-control" id="InputName">\n      </div>\n      <div class="mb-3>\n        <label for="InputEmail" class="form-label">E-mail:</label>\n        <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">\n      </div>\n      <div class="mb-3">\n          <label for="InputPassword" class="form-label">Parolă:</label>\n          <input type="password" class="form-control" id="InputPassword">\n      </div>\n      <div class="mb-3">\n          <label for="repassword" class="form-label">Confirmare parolă:</label>\n          <input type="password" class="form-control" id="repassword">\n      </div>\n      \n      <button type="submit"  class="btn btn-danger bg-gradient mb-3">Înregistrează-te</button>\n    </form>\n    <a href="/#/signin"  onClick="window.close();window.open('/#/signin')" class="link-danger pointer">👉Ai cont deja? Intră aici!</a>\n   </div> \n    `;
+        return "\n   <div class='container container-register shadow-lg p-5 mb-5 bg-transparent bg-gradient rounded position-relative '> \n    <form id='register-form'>\n    <div class=\"mb-3\">\n        <label for=\"InputName\" class=\"form-label\">Nume:</label>\n        <input type=\"name\" class=\"form-control\" id=\"InputName\">\n      </div>\n      <div class=\"mb-3>\n        <label for=\"InputEmail\" class=\"form-label\">E-mail:</label>\n        <input type=\"email\" class=\"form-control\" id=\"InputEmail\" aria-describedby=\"emailHelp\">\n      </div>\n      <div class=\"mb-3\">\n          <label for=\"InputPassword\" class=\"form-label\">Parol\u0103:</label>\n          <input type=\"password\" class=\"form-control\" id=\"InputPassword\">\n      </div>\n      <div class=\"mb-3\">\n          <label for=\"repassword\" class=\"form-label\">Confirmare parol\u0103:</label>\n          <input type=\"password\" class=\"form-control\" id=\"repassword\">\n      </div>\n      \n      <button type=\"submit\"  class=\"btn btn-danger bg-gradient mb-3\">\xCEnregistreaz\u0103-te</button>\n    </form>\n    <a href=\"/#/signin\"  onClick=\"window.close();window.open('/#/signin')\" class=\"link-danger pointer\">\uD83D\uDC49Ai cont deja? Intr\u0103 aici!</a>\n   </div> \n    ";
     }
 };
 var _default = RegisterScreen;
@@ -1027,42 +1350,73 @@ exports.default = void 0;
 var _api = require("../js/api.js");
 var _localStorage = require("../js/localStorage.js");
 var _utils = require("../js/utils.js");
-const ProfileScreen = {
-    after_render: ()=>{
-        const logout = document.getElementById("signout");
-        const btnShop = document.querySelector(".cart");
-        const profileForm = document.getElementById("profile-form");
-        logout.addEventListener("click", function() {
-            if (document.location.hash = `/`) {
-                window.location.reload();
-                _localStorage.clearUser();
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
             }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+var ProfileScreen = {
+    after_render: ()=>{
+        var logout = document.getElementById("signout");
+        var btnShop = document.querySelector(".cart");
+        var profileForm = document.getElementById("profile-form");
+        logout.addEventListener("click", function() {
+            document.location.hash = "/";
+            window.location.reload();
+            _localStorage.clearUser();
         });
         btnShop.addEventListener("click", function() {
-            if (document.location.hash = `/cart`) window.location.reload();
+            document.location.hash = "/cart";
+            window.location.reload();
         });
-        profileForm.addEventListener("submit", async (e)=>{
-            e.preventDefault();
-            _utils.showLoading();
-            const data = await _api.update({
-                name: String(document.getElementById("InputName").value),
-                email: String(document.getElementById("InputEmail").value),
-                password: String(document.getElementById("InputPassword").value)
+        profileForm.addEventListener("submit", /*#__PURE__*/ function() {
+            var _ref = _asyncToGenerator(function*(e) {
+                e.preventDefault();
+                _utils.showLoading();
+                var data = yield _api.update({
+                    name: String(document.getElementById("InputName").value),
+                    email: String(document.getElementById("InputEmail").value),
+                    password: String(document.getElementById("InputPassword").value)
+                });
+                _utils.hideLoading();
+                if (data.error) alert(data.error);
+                else {
+                    _localStorage.setuserInfo(data);
+                    document.location.hash = "/signin";
+                    _utils.redirectUser();
+                    showMessage("✔️Schimbarea a fost efectuata!");
+                }
             });
-            _utils.hideLoading();
-            if (data.error) alert(data.error);
-            else {
-                _localStorage.setuserInfo(data);
-                document.location.hash = "/signin";
-                _utils.redirectUser();
-                showMessage("✔️Schimbarea a fost efectuata!");
-            }
-        });
+            return function(_x) {
+                return _ref.apply(this, arguments);
+            };
+        }());
     },
     render: ()=>{
-        const { name , email  } = _localStorage.getUserInfo();
+        var { name , email  } = _localStorage.getUserInfo();
         if (!name) document.location.hash = "/";
-        return `\n   <div class='container container-register shadow-lg p-5 mb-5 bg-transparent bg-gradient rounded position-relative '> \n   <h6 class='text-muted'>👋🏻Aici poți schimba numele, e-mailul sau parola.</h6>\n    <form id='profile-form'>\n    <div class="mb-3">\n        <label for="InputName" class="form-label">Nume:</label>\n        <input type="name" class="form-control" value="${name}" id="InputName">\n      </div>\n      <div class="mb-3>\n        <label for="InputEmail" class="form-label">Email:</label>\n        <input type="email" class="form-control" id="InputEmail" value="${email}" aria-describedby="emailHelp">\n      </div>\n      <div class="mb-3">\n          <label for="InputPassword" class="form-label">Parolă:</label>\n          <input type="password" class="form-control" id="InputPassword">\n      </div>\n      \n      <button type="submit" class="btn btn-danger bg-danger bg-gradient mb-3">Schimbă</button>\n      <button type="button"  id='signout' class="btn btn-danger bg-danger bg-gradient mb-3">Deloghează-te</button>\n    </form>\n\n   </div> \n   <div class="p-3"></div>\n    `;
+        return "\n   <div class='container container-register shadow-lg p-5 mb-5 bg-transparent bg-gradient rounded position-relative '> \n   <h6 class='text-muted'>\uD83D\uDC4B\uD83C\uDFFBAici po\u021Bi schimba numele, e-mailul sau parola.</h6>\n    <form id='profile-form'>\n    <div class=\"mb-3\">\n        <label for=\"InputName\" class=\"form-label\">Nume:</label>\n        <input type=\"name\" class=\"form-control\" value=\"".concat(name, "\" id=\"InputName\">\n      </div>\n      <div class=\"mb-3>\n        <label for=\"InputEmail\" class=\"form-label\">Email:</label>\n        <input type=\"email\" class=\"form-control\" id=\"InputEmail\" value=\"").concat(email, "\" aria-describedby=\"emailHelp\">\n      </div>\n      <div class=\"mb-3\">\n          <label for=\"InputPassword\" class=\"form-label\">Parol\u0103:</label>\n          <input type=\"password\" class=\"form-control\" id=\"InputPassword\">\n      </div>\n      \n      <button type=\"submit\" class=\"btn btn-danger bg-danger bg-gradient mb-3\">Schimb\u0103</button>\n      <button type=\"button\"  id='signout' class=\"btn btn-danger bg-danger bg-gradient mb-3\">Delogheaz\u0103-te</button>\n    </form>\n\n   </div> \n   <div class=\"p-3\"></div>\n    ");
     }
 };
 var _default = ProfileScreen;
@@ -1081,33 +1435,65 @@ function _interopRequireDefault(obj) {
         default: obj
     };
 }
-const ShippingScreen = {
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+var ShippingScreen = {
     after_render: ()=>{
-        const btnShop = document.querySelector(".cart");
-        const shoppingForm = document.getElementById("shipping-form");
+        var btnShop = document.querySelector(".cart");
+        var shoppingForm = document.getElementById("shipping-form");
         btnShop.addEventListener("click", function() {
-            if (document.location.hash = `/cart`) window.location.reload();
+            document.location.hash = "/cart";
+            window.location.reload();
         });
-        shoppingForm.addEventListener("submit", async (e)=>{
-            e.preventDefault();
-            _localStorage.setShipping({
-                adress: document.getElementById("adress").value,
-                city: document.getElementById("city").value,
-                postalCode: document.getElementById("postalcode").value,
-                country: document.getElementById("country").value
+        shoppingForm.addEventListener("submit", /*#__PURE__*/ function() {
+            var _ref = _asyncToGenerator(function*(e) {
+                e.preventDefault();
+                _localStorage.setShipping({
+                    adress: document.getElementById("adress").value,
+                    city: document.getElementById("city").value,
+                    postalCode: document.getElementById("postalcode").value,
+                    country: document.getElementById("country").value
+                });
+                document.location.hash = "/shipping";
             });
-            document.location.hash = `/shipping`;
-        });
+            return function(_x) {
+                return _ref.apply(this, arguments);
+            };
+        }());
         console.log(document.getElementById("adress").value);
     },
     render: ()=>{
-        const { name  } = _localStorage.getUserInfo();
+        var { name  } = _localStorage.getUserInfo();
         if (!name) document.location.hash = "/";
-        const { adress , city , postalCode , country  } = _localStorage.getShipping();
-        return `\n    ${_CheckOutSteps.default.render({
+        var { adress , city , postalCode , country  } = _localStorage.getShipping();
+        return "\n    ".concat(_CheckOutSteps.default.render({
             step1: true,
             step2: true
-        })}\n   <div class='container container-shipping shadow-lg p-5 mb-5 bg-transparent bg-gradient rounded position-relative '> \n    <form id='shipping-form'>\n    <div class="mb-3">\n        <label for="adress" class="form-label">Adresă:</label>\n        <input type="text" class="form-control" value="${adress}" id="adress">\n      </div>\n      <div class="mb-3">\n        <label for="country" class="form-label">Județ:</label>\n        <input type="country" class="form-control" value="${country}" id="country">\n      </div>\n      <div class="mb-3">\n        <label for="city" class="form-label">Oraș:</label>\n        <input type="text" class="form-control" value="${city}" id="city">\n      </div>\n      <div class="mb-3">\n      <label for="postalcode" class="form-label">Codul poștal:</label>\n      <input type="text" class="form-control" value="${postalCode}" id="postalcode">\n    </div>\n     <button type="submit" onClick="window.close();window.open('/#/payment')" class="btn btn-danger  bg-gradient">Continuă</button>\n    </form>\n\n   </div>\n    <div class="p-3"></div>\n    `;
+        }), "\n   <div class='container container-shipping shadow-lg p-5 mb-5 bg-transparent bg-gradient rounded position-relative '> \n    <form id='shipping-form'>\n    <div class=\"mb-3\">\n        <label for=\"adress\" class=\"form-label\">Adres\u0103:</label>\n        <input type=\"text\" class=\"form-control\" value=\"").concat(adress, "\" id=\"adress\">\n      </div>\n      <div class=\"mb-3\">\n        <label for=\"country\" class=\"form-label\">Jude\u021B:</label>\n        <input type=\"country\" class=\"form-control\" value=\"").concat(country, "\" id=\"country\">\n      </div>\n      <div class=\"mb-3\">\n        <label for=\"city\" class=\"form-label\">Ora\u0219:</label>\n        <input type=\"text\" class=\"form-control\" value=\"").concat(city, "\" id=\"city\">\n      </div>\n      <div class=\"mb-3\">\n      <label for=\"postalcode\" class=\"form-label\">Codul po\u0219tal:</label>\n      <input type=\"text\" class=\"form-control\" value=\"").concat(postalCode, "\" id=\"postalcode\">\n    </div>\n     <button type=\"submit\" onClick=\"window.close();window.open('/#/payment')\" class=\"btn btn-danger  bg-gradient\">Continu\u0103</button>\n    </form>\n\n   </div>\n    <div class=\"p-3\"></div>\n    ");
     }
 };
 var _default = ShippingScreen;
@@ -1119,9 +1505,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = void 0;
-const CheckoutSteps = {
+var CheckoutSteps = {
     render: (props)=>{
-        return `\n        <div class="container-fluid checkout-steps ">\n          <div class="${props.step1 ? "active" : ""}">Logare</div>\n          <div class="${props.step2 ? "active" : ""}">Info</div>\n          <div class="${props.step3 ? "active" : ""}">Plată</div>\n          <div class="${props.step4 ? "active" : ""}">Comandă</div>\n        </div>\n        `;
+        return "\n        <div class=\"container-fluid checkout-steps \">\n          <div class=\"".concat(props.step1 ? "active" : "", "\">Logare</div>\n          <div class=\"").concat(props.step2 ? "active" : "", "\">Info</div>\n          <div class=\"").concat(props.step3 ? "active" : "", "\">Plat\u0103</div>\n          <div class=\"").concat(props.step4 ? "active" : "", "\">Comand\u0103</div>\n        </div>\n        ");
     }
 };
 var _default = CheckoutSteps;
@@ -1140,30 +1526,62 @@ function _interopRequireDefault(obj) {
         default: obj
     };
 }
-const PaymentScreen = {
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+var PaymentScreen = {
     after_render: ()=>{
-        const btnShop = document.querySelector(".cart");
-        const shoppingForm = document.getElementById("payment-form");
+        var btnShop = document.querySelector(".cart");
+        var shoppingForm = document.getElementById("payment-form");
         btnShop.addEventListener("click", function() {
-            if (document.location.hash = `/cart`) window.location.reload();
+            document.location.hash = "/cart";
+            window.location.reload();
         });
-        shoppingForm.addEventListener("submit", async (e)=>{
-            e.preventDefault();
-            const paymentMethod = document.querySelector("input[name='payment-method:checked']").value;
-            _localStorage.setPayment({
-                paymentMethod
+        shoppingForm.addEventListener("submit", /*#__PURE__*/ function() {
+            var _ref = _asyncToGenerator(function*(e) {
+                e.preventDefault();
+                var paymentMethod = document.querySelector("input[name='payment-method:checked']").value;
+                _localStorage.setPayment({
+                    paymentMethod
+                });
+                document.location.hash = "/placeorder";
             });
-            document.location.hash = `/placeorder`;
-        });
+            return function(_x) {
+                return _ref.apply(this, arguments);
+            };
+        }());
     },
     render: ()=>{
-        const { name  } = _localStorage.getUserInfo();
+        var { name  } = _localStorage.getUserInfo();
         if (!name) document.location.hash = "/";
-        return `\n    ${_CheckOutSteps.default.render({
+        return "\n    ".concat(_CheckOutSteps.default.render({
             step1: true,
             step2: true,
             step3: true
-        })}\n   <div class='container container-payment shadow-lg mt-4 p-5 mb-3 bg-transparent bg-gradient rounded position-relative  '> \n    <form id='payment-form'>\n    <ul class="form-items">\n    <li>\n      <div>\n        <input type="radio"\n        name="payment-method"\n        id="card"\n        value="Card"\n        checked />\n        <label for="card" >💳Card</label>\n       </div> \n    </li>\n    <li>\n    <div>\n      <input type="radio"\n      name="payment-method"\n      id="cash"\n      value="Cash"\n       />\n      <label for="cash" >💶Plata la ramburs</label>\n     </div> \n  </li> \n  </ul>\n       <button type="submit"  onClick="window.close();window.open('/#/order')" class="btn btn-danger  bg-gradient">Continuă</button>\n    </form>\n\n   </div> \n    `;
+        }), "\n   <div class='container container-payment shadow-lg mt-4 p-5 mb-3 bg-transparent bg-gradient rounded position-relative  '> \n    <form id='payment-form'>\n    <ul class=\"form-items\">\n    <li>\n      <div>\n        <input type=\"radio\"\n        name=\"payment-method\"\n        id=\"card\"\n        value=\"Card\"\n        checked />\n        <label for=\"card\" >\uD83D\uDCB3Card</label>\n       </div> \n    </li>\n    <li>\n    <div>\n      <input type=\"radio\"\n      name=\"payment-method\"\n      id=\"cash\"\n      value=\"Cash\"\n       />\n      <label for=\"cash\" >\uD83D\uDCB6Plata la ramburs</label>\n     </div> \n  </li> \n  </ul>\n       <button type=\"submit\"  onClick=\"window.close();window.open('/#/order')\" class=\"btn btn-danger  bg-gradient\">Continu\u0103</button>\n    </form>\n\n   </div> \n    ");
     }
 };
 var _default = PaymentScreen;
@@ -1184,18 +1602,44 @@ function _interopRequireDefault(obj) {
         default: obj
     };
 }
-const convertCartToOrder = ()=>{
-    const orderItems = _localStorage.getCartItems();
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) resolve(value);
+    else Promise.resolve(value).then(_next, _throw);
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+var convertCartToOrder = ()=>{
+    var orderItems = _localStorage.getCartItems();
     if (orderItems.length === 0) document.location.hash = "/cart";
-    const shipping = _localStorage.getShipping();
+    var shipping = _localStorage.getShipping();
     if (!shipping.adress) document.location = "/shipping";
-    const payment = _localStorage.getPayment();
+    var payment = _localStorage.getPayment();
     if (!payment.paymentMethod) document.location.hash = "/payment";
-    const itemsPrice = orderItems.reduce((a, c)=>a + c.price * c.qty
+    var itemsPrice = orderItems.reduce((a, c)=>a + c.price * c.qty
     , 0);
-    const shippingPrice = itemsPrice > 100 ? 0 : 10;
-    const taxPrice = Math.round(0.15 * itemsPrice * 100) / 100;
-    const totalPrice = itemsPrice + shippingPrice + taxPrice;
+    var shippingPrice = itemsPrice > 100 ? 0 : 10;
+    var taxPrice = Math.round(0.15 * itemsPrice * 100) / 100;
+    var totalPrice = itemsPrice + shippingPrice + taxPrice;
     return {
         orderItems,
         shipping,
@@ -1206,27 +1650,33 @@ const convertCartToOrder = ()=>{
         totalPrice
     };
 };
-const PlaceOrderScreen = {
-    after_render: async ()=>{
-        document.getElementById("placeorder-button").addEventListener("click", async ()=>{
-            const order = convertCartToOrder();
-            console.log(order);
-            _utils.showLoading();
-            const data = await _api.createOrder(order);
-            _utils.hideLoading();
-            if (data.error) _utils.showMessage(data.error);
-            else _localStorage.cleanCart(); // document.location.hash = `/order/${data.order.id}`;
+var PlaceOrderScreen = {
+    after_render: function() {
+        var _after_render = _asyncToGenerator(function*() {
+            document.getElementById("placeorder-button").addEventListener("click", /*#__PURE__*/ _asyncToGenerator(function*() {
+                var order = convertCartToOrder();
+                console.log(order);
+                _utils.showLoading();
+                var data = yield _api.createOrder(order);
+                _utils.hideLoading();
+                if (data.error) _utils.showMessage(data.error);
+                else _localStorage.cleanCart(); // document.location.hash = `/order/${data.order.id}`;
+            }));
         });
-    },
+        function after_render() {
+            return _after_render.apply(this, arguments);
+        }
+        return after_render;
+    }(),
     render: ()=>{
-        const { orderItems , shipping , payment , itemsPrice , shippingPrice , taxPrice , totalPrice  } = convertCartToOrder();
-        return `\n    <div>\n      ${_CheckOutSteps.default.render({
+        var { orderItems , shipping , payment , itemsPrice , shippingPrice , taxPrice , totalPrice  } = convertCartToOrder();
+        return "\n    <div>\n      ".concat(_CheckOutSteps.default.render({
             step1: true,
             step2: true,
             step3: true,
             step4: true
-        })}\n      <div class="order shadow-lg p-4 mb-5 bg-transparent bg-gradient rounded">\n        <div class="order-info container">\n          <div >\n            <h2>Adresa de plată</h2>\n            <div>\n            ${String(shipping.adress)}, ${shipping.city}, ${shipping.postalCode}, \n            ${shipping.country}\n            </div>\n          </div>\n          <div>\n            <h2>Metoda de plată</h2>\n            <div class="h4">\n              ${payment.paymentMethod}\n            </div>\n          </div>\n          <div>\n            <ul class="cart-list-container ">\n              <li>\n                <h2>Coșul tău</h2>\n                <div id="prt">🏷️Preț</div>\n              </li>\n              ${orderItems.map((item)=>`\n                <li>\n                  <div class="cart-image">\n                    <img src="./src/img/${item.image}.jpeg" alt="${item.tag}" />\n                  </div>\n                  <div class="cart-name">\n                    <div>\n                      <a class="text-decoration-none text-dark h3" href="/#/product/${item.product}">${item.name} </a>\n                    </div>\n                    <div> Cantitate: ${item.qty} </div>\n                  </div>\n                  <div class="cart-price"> ${item.price}lei</div>\n                </li>\n                `
-        ).join("\n")}\n            </ul>\n          </div>\n        </div>\n        <div class="order-action">\n           <ul class="position-relative">\n                <li>\n                  <h2>Sumar comandă</h2>\n                 </li>\n                 <li><div>🧾Produse</div><div>${itemsPrice}lei</div></li>\n                 <li><div>🚚Taxă curier</div><div>${shippingPrice}lei</div></li>\n                 <li class="total text-dark"><div>Total</div><div>${totalPrice}lei</div></li> \n                 <li>\n                 <button id="placeorder-button" class="primary fw btn btn-danger  bg-gradient position-absolute top-100 start-50 translate-middle">\n                 Plasează comanda\n                 </button>\n        </div>\n      </div>\n    </div>\n    <div class="p-3"></div>\n    `;
+        }), "\n      <div class=\"order shadow-lg p-4 mb-5 bg-transparent bg-gradient rounded\">\n        <div class=\"order-info container\">\n          <div >\n            <h2>Adresa de plat\u0103</h2>\n            <div>\n            ").concat(String(shipping.adress), ", ").concat(shipping.city, ", ").concat(shipping.postalCode, ", \n            ").concat(shipping.country, "\n            </div>\n          </div>\n          <div>\n            <h2>Metoda de plat\u0103</h2>\n            <div class=\"h4\">\n              ").concat(payment.paymentMethod, "\n            </div>\n          </div>\n          <div>\n            <ul class=\"cart-list-container \">\n              <li>\n                <h2>Co\u0219ul t\u0103u</h2>\n                <div id=\"prt\">\uD83C\uDFF7\uFE0FPre\u021B</div>\n              </li>\n              ").concat(orderItems.map((item)=>"\n                <li>\n                  <div class=\"cart-image\">\n                    <img src=\"./src/img/".concat(item.image, ".jpeg\" alt=\"").concat(item.tag, "\" />\n                  </div>\n                  <div class=\"cart-name\">\n                    <div>\n                      <a class=\"text-decoration-none text-dark h3\" href=\"/#/product/").concat(item.product, "\">").concat(item.name, " </a>\n                    </div>\n                    <div> Cantitate: ").concat(item.qty, " </div>\n                  </div>\n                  <div class=\"cart-price\"> ").concat(item.price, "lei</div>\n                </li>\n                ")
+        ).join("\n"), "\n            </ul>\n          </div>\n        </div>\n        <div class=\"order-action\">\n           <ul class=\"position-relative\">\n                <li>\n                  <h2>Sumar comand\u0103</h2>\n                 </li>\n                 <li><div>\uD83E\uDDFEProduse</div><div>").concat(itemsPrice, "lei</div></li>\n                 <li><div>\uD83D\uDE9ATax\u0103 curier</div><div>").concat(shippingPrice, "lei</div></li>\n                 <li class=\"total text-dark\"><div>Total</div><div>").concat(totalPrice, "lei</div></li> \n                 <li>\n                 <button id=\"placeorder-button\" class=\"primary fw btn btn-danger  bg-gradient position-absolute top-100 start-50 translate-middle\">\n                 Plaseaz\u0103 comanda\n                 </button>\n        </div>\n      </div>\n    </div>\n    <div class=\"p-3\"></div>\n    ");
     }
 };
 var _default = PlaceOrderScreen;
