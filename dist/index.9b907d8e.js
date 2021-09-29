@@ -523,7 +523,7 @@ const HomeScreen = {
     },
     render: async ()=>{
         _utils.showLoading();
-        const res = await fetch("http://localhost:1998/api/product");
+        const res = await fetch(" https://serene-sea-96098.herokuapp.com/api/product");
         _utils.hideLoading();
         if (!res || !res.ok) return `<div>Eroare</div>`;
         const products = await res.json();
@@ -806,7 +806,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.apiUrl = void 0;
-const apiUrl = "http://localhost:1998";
+const apiUrl = " https://serene-sea-96098.herokuapp.com";
 exports.apiUrl = apiUrl;
 
 },{}],"5t2yc":[function(require,module,exports) {
