@@ -1,0 +1,92 @@
+$primary: #2f4786;
+$secondary: #331d71;
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+/* General */
+body {
+  background-color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Showcase */
+#showcase {
+  .showcase-image {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+  .animate__fadeIn {
+    --animate-duration: 4s;
+  }
+  .animate__shakeY {
+    --animate-duration: 7s;
+  }
+
+  .fa-chevron-down {
+    font-size: 6rem;
+    margin-top: 3rem;
+    color: #2a4c87;
+    cursor: pointer;
+  }
+}
+
+// Home
+#home {
+  position: relative;
+  height: 100vh;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: url(/img/background-1.jpg) no-repeat center center/cover;
+    opacity: 0.4;
+  }
+
+  .navbar {
+    text-align: center;
+    .navbar-brand {
+      img {
+        height: 80px;
+        width: 90px;
+      }
+    }
+  }
+
+  .container-presentation {
+    position: relative;
+    text-align: center;
+    top: 5rem;
+    font-family: "MonteCarlo", cursive;
+    font-weight: bolder;
+    color: $secondary;
+    font-size: 1.75rem;
+    img {
+      height: 30rem;
+      width: 20rem;
+      box-shadow: 0 0 6px black;
+    }
+  }
+
+  .animate__fadeInLeft {
+    --animate-duration: 1s;
+  }
+
+  .animate__fadeInRight {
+    --animate-duration: 1s;
+  }
+
+  .animate__fadeIn {
+    --animate-duration: 2s;
+  }
+
+  .hidden {
+    display: none;
+  }
+}
