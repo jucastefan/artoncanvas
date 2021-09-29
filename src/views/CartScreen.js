@@ -24,7 +24,7 @@ const addToCart = (item, forceUpdate = false) => {
 
 const removeFromCart = (id) => {
   const items = JSON.parse(localStorage.getItem("cartItems"));
-  setCartItems(items.filter((x) => x.product === Number(id)));
+  setCartItems(items.filter((x) => x.product === id));
   if (id === parseRequestUrl().id) {
     if ((document.location.hash = `/cart`)) {
       window.location.reload();
@@ -89,7 +89,7 @@ const CartScreen = {
                     (item) => `
             <li>
               <div class="cart-image">
-                <img src="/src/img/${item.image}.jpeg" alt="${item.name}" />
+                <img src="${item.image}.png" alt="${item.name}" />
               </div>
               <div class="cart-name">
                 <div>

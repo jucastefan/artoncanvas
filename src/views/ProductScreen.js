@@ -36,7 +36,7 @@ const ProductScreen = {
          <div class="col pb-md-5  ">
             <div class="card  d-flex bg-transparent w-60 justify-content-center align-items-center shadow-lg p-3 mb-4 bg-transparent bg-gradient rounded">
               
-                 <img src="./src/img/${product.img}.jpeg" class="card-img-top img-thumbnail  img-fluid mt-4 pointer" alt="${product.tag}">
+                 <img src="${product.img}.png" class="card-img-top img-thumbnail  img-fluid mt-4 pointer" alt="${product.tag}">
                
                <div class="card-body">
                    

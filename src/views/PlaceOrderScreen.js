@@ -54,7 +54,6 @@ const PlaceOrderScreen = {
           showMessage(data.error);
         } else {
           cleanCart();
-          // document.location.hash = `/order/${data.order.id}`;
         }
       });
   },
@@ -104,7 +103,7 @@ const PlaceOrderScreen = {
                   (item) => `
                 <li>
                   <div class="cart-image">
-                    <img src="./src/img/${item.image}.jpeg" alt="${item.tag}" />
+                    <img src="${item.image}.png" alt="${item.tag}" />
                   </div>
                   <div class="cart-name">
                     <div>
