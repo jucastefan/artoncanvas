@@ -20,7 +20,7 @@
   "name": "artoncanvas-final",
   "version": "1.0.0",
   "type": "module",
-  "main": "dist/index.html",
+  "main": "src/js/app.js",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
