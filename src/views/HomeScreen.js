@@ -31,7 +31,7 @@ const HomeScreen = {
          <div class="col ">
             <div class="card  d-flex bg-transparent justify-content-center align-items-center shadow-lg p-3 mb-4 bg-transparent bg-gradient rounded ">
                <a id='pp' href="/#/product/${product.id}" onClick="window.close();window.open('/#/product/${product.id}')">
-                 <img src="./src/img/${product.img}.jpeg" id="prod" class="card-img-top img-thumbnail img-fluid mt-5 rounded pointer" alt="${product.tag}">
+                 <img src="./src/img/${product.img}.jpg" id="prod" class="card-img-top img-thumbnail img-fluid mt-5 rounded pointer" alt="${product.tag}">
                </a>
                <div class="card-body">
                    <h6 class="card-title">🏷️Preț: ${product.price}lei</h6>
