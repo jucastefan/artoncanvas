@@ -15,7 +15,7 @@ const HomeScreen = {
   },
   render: async () => {
     showLoading();
-    const res = await fetch("https://secret-bastion-33131.herokuapp.com/");
+    const res = await fetch("https://secret-bastion-33131.herokuapp.com");
     hideLoading();
     if (!res || !res.ok) {
       return `<div>Eroare</div>`;
