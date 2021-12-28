@@ -70,7 +70,7 @@ const RegisterScreen = {
       
       <button type="submit"  class="btn btn-danger bg-gradient mb-3">Înregistrează-te</button>
     </form>
-    <a href="/#/signin"  onClick="window.close();window.open('/#/signin')" class="link-danger pointer">👉Ai cont deja? Intră aici!</a>
+    <a href="/#/signin"  onClick="if (document.location.hash = '/signin') window.location.reload()" class="link-danger pointer">👉Ai cont deja? Intră aici!</a>
    </div> 
     `;
   },
