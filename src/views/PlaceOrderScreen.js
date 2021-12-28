@@ -103,7 +103,7 @@ const PlaceOrderScreen = {
                   (item) => `
                 <li>
                   <div class="cart-image">
-                    <img src="/src/img/${item.image}.png" alt="${item.tag}" />
+                    <img src="${item.image}.png" alt="${item.tag}" />
                   </div>
                   <div class="cart-name">
                     <div>
