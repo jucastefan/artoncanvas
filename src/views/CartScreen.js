@@ -89,7 +89,7 @@ const CartScreen = {
                     (item) => `
             <li>
               <div class="cart-image">
-                <img src="/src/img/${item.image}.png" alt="${item.name}" />
+                <img src="${item.image}.png" alt="${item.name}" />
               </div>
               <div class="cart-name">
                 <div>
