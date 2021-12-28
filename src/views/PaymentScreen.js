@@ -53,7 +53,7 @@ const PaymentScreen = {
      </div> 
   </li> 
   </ul>
-       <button type="submit"  onClick="window.close();window.open('/#/order')" class="btn btn-danger  bg-gradient">Continuă</button>
+       <button type="submit"  onClick="if (document.location.hash = '/order') window.location.reload()" class="btn btn-danger  bg-gradient">Continuă</button>
     </form>
 
    </div> 

@@ -136,7 +136,7 @@ const CartScreen = {
               ? `<button
                 type="button"
                 id="checkout-button"
-                onClick="window.close();window.open('/#/shipping')"
+                onClick="if (document.location.hash = '/shipping') window.location.reload()"
                 class="primary fw btn bg-gradient btn-danger text-white"
               >
                 Comandă
@@ -144,7 +144,7 @@ const CartScreen = {
               : `<button
                 type="button"
                 id="checkout-button"
-                onClick="window.close();window.open('/#/signin')"
+                onClick="if (document.location.hash = '/signin') window.location.reload()"
                 class="primary fw btn bg-gradient  btn-danger text-white"
               >
                 Comandă

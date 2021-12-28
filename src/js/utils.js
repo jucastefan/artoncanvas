@@ -50,7 +50,7 @@ export const showMessage = (message, callback) => {
 
 export const redirectUser = () => {
   if (getCartItems().length !== 0) {
-    document.location.hash = "/"
+    document.location.hash = "/shipping"
     window.location.reload();
   } else {
     document.location = "/";

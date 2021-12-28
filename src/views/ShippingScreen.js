@@ -50,7 +50,7 @@ const ShippingScreen = {
       <label for="postalcode" class="form-label">Codul poștal:</label>
       <input type="text" class="form-control" value="${postalCode}" id="postalcode">
     </div>
-     <button type="submit" onClick="window.close();window.open('/#/payment')" class="btn btn-danger  bg-gradient">Continuă</button>
+     <button type="submit" onClick="if (document.location.hash = '/payment') window.location.reload()" class="btn btn-danger  bg-gradient">Continuă</button>
     </form>
 
    </div>
