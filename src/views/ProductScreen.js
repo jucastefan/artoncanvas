@@ -31,7 +31,7 @@ const ProductScreen = {
     }
     hideLoading();
     return `
-    <a type="button" href='/' onClick="window.close();window.open('/')" id='backtoshop' class="btn bg-gradient btn-danger  mb-2 text-white position-absolute top-0 start-50 translate-middle-x"><i class="fas fa-arrow-circle-left p-1"></i>Inapoi<i class="fas fa-store p-1"></i></a>
+    <a type="button" href='/'onClick="if (document.location.hash = '/') window.location.reload()" id='backtoshop' class="btn bg-gradient btn-danger  mb-2 text-white position-absolute top-0 start-50 translate-middle-x"><i class="fas fa-arrow-circle-left p-1"></i>Inapoi<i class="fas fa-store p-1"></i></a>
     <div class="row row-cols-1 row-cols-md-3 g-5 d-flex justify-content-center align-items-center mt-4 ">
          <div class="col pb-md-5  ">
             <div class="card  d-flex bg-transparent w-60 justify-content-center align-items-center shadow-lg p-3 mb-4 bg-transparent bg-gradient rounded">
