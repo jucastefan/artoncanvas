@@ -1,0 +1,91 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth;
+  background-color: #f8f8f8d5;
+  overflow: auto;
+  position: relative;
+  min-height: 100vh;
+  background-image: repeating-linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      60deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px,
+      transparent 60px
+    ),
+    linear-gradient(
+      60deg,
+      rgba(0, 0, 0, 0.1) 25%,
+      transparent 25%,
+      transparent 75%,
+      rgba(0, 0, 0, 0.1) 75%,
+      rgba(0, 0, 0, 0.1)
+    ),
+    linear-gradient(
+      120deg,
+      rgba(0, 0, 0, 0.1) 25%,
+      transparent 25%,
+      transparent 75%,
+      rgba(0, 0, 0, 0.1) 75%,
+      rgba(0, 0, 0, 0.1)
+    );
+  background-size: 800px 1000px;
+}
+
+/* Navbar */
+#navbar .navbar {
+  text-align: center;
+}
+#navbar .navbar .navbar-brand img {
+  height: 4rem;
+  width: 5rem;
+}
+.scris {
+  position: relative;
+  right: 50%;
+}
+/* Products */
+
+#main-container .card-img-top {
+  height: 25rem;
+  width: 17rem;
+  box-shadow: 0 0 3px black;
+}
+
+#main-container .card {
+  box-shadow: 0 0 2px black;
+}
+/* Pagination */
+#pages {
+  margin: 4rem auto;
+}
+
+/* Footer */
+#footer {
+  background-color: #f8f8f8d5;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#footer p {
+  margin-top: 1rem;
+}
+
+.hidden-badge {
+  display: none;
+}

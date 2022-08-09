@@ -1,0 +1,76 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+/* General */
+body {
+  background-color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Showcase */
+#showcase .showcase-image {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+#showcase .animate__fadeIn {
+  --animate-duration: 4s;
+}
+#showcase .animate__shakeY {
+  --animate-duration: 7s;
+}
+#showcase .fa-chevron-down {
+  font-size: 6rem;
+  margin-top: 3rem;
+  color: #2a4c87;
+  cursor: pointer;
+}
+
+#home {
+  position: relative;
+  height: 100vh;
+}
+#home::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: url(/img/background-1.jpg) no-repeat center center/cover;
+  opacity: 0.4;
+}
+#home .navbar {
+  text-align: center;
+}
+#home .navbar .navbar-brand img {
+  height: 80px;
+  width: 90px;
+}
+#home .container-presentation {
+  position: relative;
+  text-align: center;
+  top: 5rem;
+  font-family: "MonteCarlo", cursive;
+  font-weight: bolder;
+  color: #331d71;
+  font-size: 1.75rem;
+}
+#home .container-presentation img {
+  height: 30rem;
+  width: 20rem;
+  box-shadow: 0 0 6px black;
+}
+#home .animate__fadeInLeft {
+  --animate-duration: 1s;
+}
+#home .animate__fadeInRight {
+  --animate-duration: 1s;
+}
+#home .animate__fadeIn {
+  --animate-duration: 2s;
+}
+#home .hidden {
+  display: none;
+}

@@ -1,0 +1,140 @@
+@media only screen and (max-width: 1024px) {
+  #backtoshop {
+    margin-bottom: 32%;
+  }
+
+  .container-signin {
+    margin: 0 auto;
+    max-width: 600px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #navbar .navbar .navbar-brand img {
+    height: 4rem;
+    width: 5rem;
+  }
+
+  #cont {
+    display: none;
+  }
+
+  #main-container .card-img-top {
+    height: 20rem;
+    width: 14rem;
+    box-shadow: 0 0 3px black;
+  }
+
+  #backtoshop {
+    margin-bottom: 24%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  #backtoshop {
+    margin-bottom: 34%;
+  }
+
+  .order h2 {
+    font-size: 1rem;
+  }
+
+  .order-action .total {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .cart-image img {
+    height: 4rem;
+  }
+
+  .cart-name a {
+    font-size: 1rem;
+  }
+
+  .cart-name {
+    font-size: 1rem;
+  }
+
+  #placeorder-button {
+    font-size: 0.75rem;
+  }
+
+  .checkout-steps > div.active {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .shop-cart {
+    position: relative;
+    right: 1rem;
+  }
+
+  .scris {
+    position: relative;
+    right: 20%;
+  }
+
+  #navbar .navbar .navbar-brand img {
+    height: 4rem;
+    width: 5rem;
+  }
+
+  #cont {
+    display: none;
+  }
+
+  #main-container .card-img-top {
+    height: 15rem;
+    width: 12rem;
+    box-shadow: 0 0 3px black;
+  }
+
+  .container-signin {
+    margin-top: 1%;
+    max-width: 600px;
+  }
+
+  .cart-name > div {
+    padding: 0 1.5rem;
+  }
+
+  .cart-price {
+    position: relative;
+    right: 4.8rem;
+    bottom: 1rem;
+    text-decoration: underline;
+  }
+
+  #prt {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 290px) {
+  #backtoshop {
+    margin-bottom: 70%;
+  }
+
+  .container-signin {
+    margin-top: 10%;
+    max-width: 600px;
+  }
+
+  .checkout-steps > div.active {
+    font-size: 0.75rem;
+  }
+
+  .cart-name > div {
+    padding: 0;
+  }
+
+  .cart-price {
+    position: relative;
+    right: 3.5rem;
+    bottom: 1rem;
+  }
+}
+
+/*# sourceMappingURL=index.b5e3749b.css.map */
